@@ -71,16 +71,16 @@ var urlData = (function () {
 	document.getElementById('searchBtn').onclick = function() {
 
 		var searchVal = document.querySelector('.searchBox input').value,
-			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
-
+//			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
+			url = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
 		$pcApi.pageJumpOther(url);
 	};
 	document.querySelector('.searchBox input').onkeydown = function(e) {
 
 		if(e.keyCode === 13) {
 			var searchVal = document.querySelector('.searchBox input').value,
-				url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
-
+//			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
+			url = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
 			$pcApi.pageJumpOther(url);
 		}
 	};

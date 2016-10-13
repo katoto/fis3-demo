@@ -277,16 +277,15 @@ SERVER_URL = "http://www.kuwo.cn";
 
     api.pageJumpOther = function( url,flag){
 
-        if(typeof(flag)=="undefined"||flag==""||flag==null){
+        if(typeof(flag)==="undefined"||flag===null|| flag===''){
             flag='true';
+
         }
         var param = '';
         param={'souces':'myhomepage'};
         var channelInfo ='my';
         channelInfo = 'ch:3;name:myhomepage;';
         var call = "PageJump?param="+encodeURIComponent(param) + ";" + encodeURIComponent(channelInfo)+ ";" +encodeURIComponent('url:'+url)+'&calljump='+flag;
-        console.log(call);
-        return;
         api.callClient(call);
     };
 
