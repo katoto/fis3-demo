@@ -1,0 +1,469 @@
+body{
+    padding: 26px 24px 10px 24px;
+    min-width: 742px;
+    width: 742px;
+    margin: 0 auto;
+    overflow-x:hidden ;
+	-webkit-user-select:none;
+	user-select:none
+}
+.head{
+
+}
+ .selectBox{
+    height: 24px;
+}
+.selectBox span{
+    font-size: 16px;
+    line-height: 24px;
+    display: inline-block;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: default;
+
+}
+ .selectBox span:before{
+    position: absolute;
+    left: 0;
+    top:2px;
+    content:'';
+    display: inline-block;
+    width: 15px;
+    height: 18px;
+    background: url("../img/t_radio/icon_radio_addr.png?__sprite") no-repeat ;
+
+    
+}
+.selectBox select{
+    width: 140px;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #cacaca;
+    border-radius: 2px;
+}
+
+ option{
+     padding: 5px;
+}
+
+
+.head .searchBox{
+    width: 260px;
+    height: 28px;
+    line-height: 28px;
+    border-radius: 5px;
+    padding-left: 11px;
+    font-size: 12px;
+}
+.head .searchBox input{
+    height: 28px;
+    width: 186px;
+    line-height: 28px;
+    border: 1px solid #cacaca;
+    padding-left: 12px;
+    border-radius: 5px 0 0 5px ;
+    color:#808080;
+
+}
+.head .searchBox button{
+    height: 30px;
+    border: 1px solid #21a0ed;
+    background-color: #21a0ed;
+    color: #fff;
+    width: 60px;
+    border-radius: 0 5px 5px 0 ;
+    outline:none;
+    cursor: pointer;
+}
+
+/*section*/
+section .dataSelect{
+    margin-top: 20px;
+}
+section .dataSelect select{
+    width: 126px;
+    height: 26px;
+    border: 1px solid #cacaca;
+}
+/*播放*/
+.playIconBox a {
+    float: left;
+    width: 83px;
+    height: 26px;
+    border: 1px solid #cacaca;
+    color: #000;
+    border-radius: 2px;
+    margin-left: 10px;
+    line-height: 26px;
+    font-size: 12px;
+}
+.playIconBox a.allAdd:hover{
+	background-color: #eff1f5;
+}
+
+
+.playIconBox .allPlay {
+    background: #21a0ed;
+    color: #fff;
+    border: 1px solid #1190dc;
+    margin-left: 30px;
+}
+.playIconBox .allPlay:hover{
+	background: #168fd8;
+}
+
+
+.playIconBox i {
+    float: left;
+    height: 14px;
+    margin: 6px 5px 0 0;
+}
+
+.playIconBox .allPlay i {
+    width: 11px;
+    background: url(http://image.kuwo.cn/website/pc/web/kudou/icon_play_white.png) no-repeat;
+    margin-left: 10px;
+}
+.playIconBox .allAdd i {
+    width: 14px;
+    background: url(http://image.kuwo.cn/website/pc/web/kudou/icon_add_blue.png) no-repeat;
+    margin-left: 9px;
+}
+
+/*列表*/
+.radio_content {
+    width: 770px;
+    margin: 26px auto;
+    overflow: hidden;
+}
+.radio_content .content_1 {
+    position: relative;
+    margin-bottom: 5px;
+}
+.radio_content .content_1 h3 {
+    height: 24px;
+    line-height: 24px;
+    font-size: 18px;
+    color: #000;
+    background: url(http://image.kuwo.cn/website/pc/radio/clock.png) no-repeat left center;
+	cursor: default;
+    padding-left: 33px;
+    margin-bottom: 8px;
+}
+
+.radio_content .contentList {
+    margin-left: 33px;
+}
+.contentList li:hover{
+    background-color: #ebeded;
+}
+.contentList li {
+    width: 717px;
+    float: left;
+    padding: 10px 0 10px 8px;
+}
+.contentList div {
+    float: left;
+    line-height: 25px;
+}
+.contentList .time {
+    width: 60px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    padding: 0;
+    margin-right: 12px;
+    border: 1px solid #bababc;
+    border-radius: 14px 14px;
+    display: inline-block;
+    cursor: default;
+}
+.contentList .name a:hover .time{
+    border: 1px solid #21a0ed ;
+}
+
+.contentList .name a:hover{
+    color:#21a0ed;
+}
+.contentList .artist a:hover{
+    color:#21a0ed;
+}
+.radio_content .content_1 a {
+    font-size: 14px;
+    color: #666;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+
+.contentList .name {
+    width: 210px;
+    margin-right: 90px;
+    position: relative;
+}
+
+.contentList .name a {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.contentList .artist {
+
+    width: 136px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 30px;
+}
+.contentList .tools {
+    margin: 7px 21px 0 0;
+}
+.contentList .tools a{
+    float: left;
+}
+
+.radio_content .contentList div {
+    float: left;
+    line-height: 25px;
+}
+.radio_content .contentList .shareBox {
+    padding: 0;
+    height: 40px;
+    top: -13px;
+    left: -150px;
+}
+.contentList li.active .tools .more{
+    background: url(../img/t_radio/radio_icon_moreActive.png?__sprite) no-repeat;
+}
+.contentList .tools .more {
+    width: 15px;
+    height: 15px;
+    background: url(../img/t_radio/radio_icon_more.png?__sprite) no-repeat;
+    margin: 1px 14px 0 0;
+    cursor: pointer;
+}
+.contentList li.active .tools .add{
+    background: url(../img/t_radio/radio_icon_addActive.png?__sprite) no-repeat;
+}
+.contentList .tools .add {
+    width: 14px;
+    height: 14px;
+    background: url(../img/t_radio/radio_icon_add.png?__sprite) no-repeat;
+    margin-right: 12px;
+}
+
+.contentList li.active .tools .down{
+    background: url(../img/t_radio/radio_icon_downActive.png?__sprite) no-repeat;
+}
+
+
+.contentList li .tools .down {
+    width: 18px;
+    height: 18px;
+    background: url(../img/t_radio/radio_icon_down.png?__sprite) no-repeat;
+    
+    margin-right: 8px;
+    cursor: pointer;
+}
+.contentList li.active .tools .pay {
+    width: 18px;
+    height: 18px;
+
+    background: url(../img/t_radio/radio_icon_downActive.png?__sprite) no-repeat;
+    margin-right: 8px;
+}
+.contentList li .tools .pay {
+    width: 18px;
+    height: 18px;
+
+    background: url(../img/t_radio/radio_icon_down.png?__sprite) no-repeat;
+    margin-right: 8px;
+}
+
+
+.contentList .tools .share {
+    float: left;
+    width: 13px;
+    height: 13px;
+    background: url(http://image.kuwo.cn/website/pc/radio/icon1.png?__sprite) -69px 0;
+    margin-top: 1px;
+    position: relative;
+}
+
+.contentList .musicTap{
+    margin-top: 4px;
+    float: right;
+    text-align: center;
+    width: 30px;
+    height: 17px;
+    line-height: 16px;
+    margin-right: 40px;
+    border-radius: 1px;
+    cursor: default;
+    font-size: 12px !important;
+}
+/*  竖线  */
+.radio_content .content_1 .roller {
+    position: absolute;
+    left: 8px;
+    top: 29px;
+    width: 8px;
+}
+.roller .roller_line:first-child {
+    height: 37px;
+}
+.roller .roller_line:last-child {
+    height: 42px;
+}
+.roller .roller_line {
+    width: 1px;
+    height: 29px;
+    background: #d2d2d2;
+    margin: 0 auto;
+}
+.roller .roller_point {
+    height: 8px;
+    background: url(http://image.kuwo.cn/website/pc/radio/roller_point.png) no-repeat;
+    margin: 5px 0;
+}
+
+/*无电台情况*/
+.noresult{
+	margin:100px auto;
+}
+
+.noresult .noresult_pic {
+    width: 113px;
+    height: 120px;
+    background: url(http://image.kuwo.cn/website/pc/radio/noresult.png) no-repeat;
+    margin: 0 auto 28px;
+}
+
+.noresult .noresult_text {
+    width: 382px;
+    height: 20px;
+    line-height: 20px;
+    background: url(http://image.kuwo.cn/website/pc/radio/noresult2.png) no-repeat left center;
+    text-align: center;
+    font-size: 16px;
+    color: #999;
+    margin: 0 auto;
+}
+
+/*遮罩*/
+#shadowBox{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	background-color: rgba(0,0,0,0.3);
+
+}
+#shadowBox div{
+	position: relative;
+	z-index: 11;
+	width: 360px;
+	height: 160px;
+	overflow: hidden;
+	background-color: #fff;
+	margin: 180px auto;
+	text-align: center;
+	border-radius: 5px;
+	cursor: default;
+	color: #666666;
+	
+}
+#shadowBox div i{
+	position: absolute;
+    right: 10px;
+    top: 9px;
+    width: 14px;
+    height: 15px;
+    cursor: pointer;
+	background: url('http://image.kuwo.cn/website/pc/web/kudou/icon_closeBtn.png') no-repeat;
+	
+}
+#shadowBox div p.shadowText{
+	line-height: 97px;
+}
+#shadowBox div a.textBtn{
+	color: #fff;
+	border-radius: 3px;
+	padding: 8px 15px 8px 15px ;
+	background-color: #21a0ed;
+}
+
+/*   --回调顶部-  */
+.rtop {
+    position: fixed;
+    display: none;
+    width: 26px;
+    height: 26px;
+    background: url(http://image.kuwo.cn/website/pc/web/kudou/top.png) no-repeat 0 0;
+    z-index: 9999999;
+    right: 26px;
+    bottom: 10px;
+    opacity: 0.6;
+}
+
+
+.rtop:hover {
+    background:url(http://image.kuwo.cn/website/pc/web/kudou/active_top.png) no-repeat 0 0;
+}
+
+/*滚动条样式*/
+body::-webkit-scrollbar{
+    width:15px;
+}
+body::-webkit-scrollbar-track {
+
+    background-color: #fafafa;
+
+} /* 滚动条的滑轨背景颜色 */
+
+body::-webkit-scrollbar-thumb {
+    border:1px solid #dbdfe2;
+    background-color: #f3f3f3;
+
+} /* 滑块颜色 */
+
+body::-webkit-scrollbar-button {
+    background:transparent;
+    /*background-color: #7c2929;*/
+
+} /* 滑轨两头的监听按钮颜色 */
+
+/*显示滚动条上方的渐增按钮*/
+body::-webkit-scrollbar-button:start:decrement,
+body::-webkit-scrollbar-button:end:increment {
+    display: block;
+    height:15px;
+}
+/*隐藏滚动条上方的渐增按钮*/
+body::-webkit-scrollbar-button:vertical:start:increment,
+body::-webkit-scrollbar-button:vertical:end:decrement {
+    display: none;
+}
+/* 定义滚动条渐增按扭的样式 */
+body::-webkit-scrollbar-button:end:increment {
+    background-image: url(http://image.kuwo.cn/website/pc/web/kudou/bar_down.jpg);
+    margin-top:2px;
+}
+/* 定义滚动条渐减按扭的样式 */
+body::-webkit-scrollbar-button:start:decrement {
+    background-image: url(http://image.kuwo.cn/website/pc/web/kudou/bar_up.jpg);
+    margin-bottom:2px;
+}
+
+/*loading  */
+.loading {
+    position: absolute;
+    left: 46%;
+    top: 250px;
+}
+

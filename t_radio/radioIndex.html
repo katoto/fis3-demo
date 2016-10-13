@@ -1,0 +1,75 @@
+
+<!--
+	@require base.css
+	@require radioIndex.css
+	@require clientApi.js
+	@require jquery.js
+	@require radioIndex.js
+-->
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>广播电台</title>
+		<link rel="stylesheet" href="../static/css/common/base.css">
+		<link rel="stylesheet" href="../static/css/radioIndex.css">
+		<meta name="keywords" content="音乐,中国好声音,蒙面歌王,音悦台,酷我音乐,高品质音乐,无损音乐,音乐播放器,音乐在线听,qq音乐,天地人音乐网,网络歌曲,英文歌曲,流行歌曲,非主流音乐,经典老歌,搞笑歌曲,儿童歌曲,云音乐">
+		<meta name="description" content="酷我音乐是领先的在线正版音乐网站,酷我音乐为您提供高品质音乐,无损音乐下载,免费无损下载,HiFi音乐下载,中国好声音,我是歌手,我想和你唱,盖世音雄,蒙面歌王,音悦台,酷我音乐,音乐播放器,音乐在线听,qq音乐,天地人音乐网,网络歌曲,好听的歌,英文歌曲,流行歌曲,非主流音乐,经典老歌,劲舞团歌曲,搞笑歌曲,儿童歌曲,云音乐,等服务.酷我音乐拥有庞大,完整的曲库,歌曲更新迅速,好音质,用酷我">
+	</head>
+	<body>
+		<header class="clearfix head">
+			<div class="fl selectBox" style="display: none;">
+				<span id="radio_Station"></span>
+				<select name="" id="sel">
+				</select>
+			</div>
+			<div class="fr searchBox clearfix">
+				<input type="text" value="" placeholder="更多电台/节目">
+				<button id="searchBtn" class="fr" onclick="">搜索</button>
+			</div>
+
+		</header>
+	
+		<section>
+			<!--日期选择和播放按钮-->
+			<div class="dataSelect clearfix">
+				<select name="" class="fl" id="radio_selectOPTime">
+				</select>
+				<div class="playIconBox clearfix">
+					<a title="播放全部歌曲" class="allPlay" href="javascript:;"><i></i>播放全部</a>
+					<a title="添加全部歌曲" class="allAdd" href="javascript:;"><i></i>添加歌曲</a>
+				</div>
+			</div>
+			<!--弹窗-->
+			<div id="shadowBox" style="display: none">
+				<div>
+					<i id="shadowClose"></i>
+					<p class="shadowText">节目未开始，请切换日期或查看其他节目</p>
+					<a href="javascript:;" class="textBtn">确定</a>
+				</div>				
+			</div>
+		
+			<!--无节目的情况-->
+			<div class="noresult" style="display: none;">
+				<div class="noresult_pic"></div>
+				<div class="noresult_text">抱歉没有找到匹配的节目</div>
+			</div>
+			<!--电台列表-->
+			<div class="radio_content listMusic" id="programList">
+			</div>
+		</section>
+		<!-- loading  -->
+		<div class="loading" style="display: block;">
+			<img src="http://image.kuwo.cn/www2016/loading.gif">
+			<span>加载中...</span>
+		</div>
+		<footer>
+			<!--回调顶部-->
+			<a href="###" hidefocus="" class="rtop backTop" onclick="returnTop();"></a>
+		</footer>
+		<script src="../static/js/modules/common/clientApi.js"></script>
+		<script src="../node_module/jq/jquery.js"></script>
+		<script src="../static/js/radioIndex.js"></script>
+	</body>
+</html>
