@@ -191,10 +191,10 @@
 				} else if (kwElementVal == "btn_page") {
 					var pageNum = $(this).html();
 //			记录		
-		setTimeout(function(){
-			jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
-			$pcApi.pageJumpOther(jumpUrl,false);
-		},100);
+			setTimeout(function(){
+				jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+				$pcApi.pageJumpOther(jumpUrl,false);
+			},100);
 
 					if(pageNum != undefined){
 						return gotoPage(module, parseInt(pageNum), false);
@@ -238,13 +238,14 @@
 				var buttonSpace = module.getKwElement("button");
 				if (buttonSpace != undefined) {
 					buttonSpace.html(pageHtml);
-					var btnPanel = buttonSpace.getKwElement("btn_panel");
-					var prevWidth = 735;
-					var pageWidth = btnPanel.width();
-					if (pageWidth == 0)
-						pageWidth = 254;
-					btnPanel.css("margin-left", (prevWidth - pageWidth) / 2
-							+ 'px');
+//					var btnPanel = buttonSpace.getKwElement("btn_panel");
+//					var prevWidth = 702;
+//					var pageWidth = btnPanel[0].clientWidth;
+//					if (pageWidth == 0){
+//						pageWidth = 254;						
+//					}
+//					btnPanel.css("margin-left", (prevWidth - pageWidth) / 2
+//								+ 'px');
 					bindButton(module, buttonSpace);
 				}
 			}
@@ -254,7 +255,7 @@
 				if (pages < 1) {
 					return "";
 				}
-				var pageHtml = '<div style="margin-left: 474px;" class="page" kw_element="btn_panel">';
+				var pageHtml = '<div  class="page" kw_element="btn_panel">';
 				if (current != 1) {
 					pageHtml += '<a hidefocus href="javascript:;" class="prev" kw_element="btn_prev"><img src="http://image.kuwo.cn/website/pc/page/prev.png" /></a>';
 				} else {

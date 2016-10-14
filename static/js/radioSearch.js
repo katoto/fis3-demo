@@ -258,8 +258,7 @@ function setEventFn(){
 			$.kw_page.gotoPage("program_search", programPageNow, true);
 		}
 		
-jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal='+serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
-
+jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal='+serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
 $pcApi.pageJumpOther(jumpUrl,false);
 	})	
 	   // tab 切换
@@ -273,7 +272,7 @@ $pcApi.pageJumpOther(jumpUrl,false);
         if($(this).index()){
 //      	节目
 			isFirstTap = 'false';
-jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
 $pcApi.pageJumpOther(jumpUrl,false);
 			$("#program_search").show();
 			if($('.choseProgram li').length<=0){
@@ -285,7 +284,7 @@ $pcApi.pageJumpOther(jumpUrl,false);
         	isFirstTap = 'true';
 //      	电台
 //http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html
-jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
 $pcApi.pageJumpOther(jumpUrl,false);
 			$("#radio_search").show();
 			if($('.choseStation li').length<=0){
@@ -296,9 +295,7 @@ $pcApi.pageJumpOther(jumpUrl,false);
     });
 }
 
-function OnJump(){
-	
-}
+
 
 /**
  *    初始化函数  全部隐藏
@@ -314,6 +311,8 @@ function initBox(){
 
 /**
  *    返回顶部按钮
+ * 
+ * 
  */
 
 function returnTop() {

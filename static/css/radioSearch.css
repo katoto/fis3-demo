@@ -142,36 +142,30 @@ footer {
 }
 
 .page {
-    float: left;
     height: 30px;
     text-align: center;
     padding: 10px 0 5px 0;
-    /*max-width: 260px;*/
-    /*margin: 0 auto;*/
 
 }
 
 
 .page .current {
-
     background-color: #21a0ed;
     color: #fff;
 }
 .page a {
-    float: left;
     font-size: 12px;
     color: #333;
     width: 30px;
     height: 30px;
     line-height: 30px;
     border-radius: 50%;
-    display: block;
-    margin-right: 5px;
+	display: inline-block;
     background-color: #DBDFE2;
-
+    font-size: 12px;
+    margin: 0 2px;
 }
 .page .point {
-    float: left;
     margin: 0 19px 0 14px;
     height: 26px;
     line-height: 26px;

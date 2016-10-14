@@ -43,10 +43,10 @@
 			<div kw_element="row_template" style="display: none;">
 				<li class="fl clearfix">
 					<!--http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html-->
-					<a onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')"><img onerror="errorimg(this)" src="{[img]}"></a>
+					<a onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')"><img onerror="errorimg(this)" src="{[img]}"></a>
 					<div>
-						<span title='{[oldName]}' onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">"{[name]}"</span><br>
-						<span onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">{[songNum]}首歌</span>
+						<span title='{[oldName]}' onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">"{[name]}"</span><br>
+						<span onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">{[songNum]}首歌</span>
 					</div>
 				</li>
 			</div>
@@ -56,16 +56,16 @@
                 <img src="http://image.kuwo.cn/www2016/loading.gif">
                 <span>加载中...</span>
             </div>
-            <div kw_element="button"></div>
+            <div kw_element="button" class="clearfix"></div>
         </div>		
 
         <div id="radio_search"  style="display: block">
 			<div kw_element="row_template" style="display: none;">
 				<li class="fl clearfix">
-					<a onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')"><img onerror="errorimg(this)" src="{[img]}"></a> 
+					<a onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')"><img onerror="errorimg(this)" src="{[img]}"></a> 
 					<div>
-						<span title='{[oldName]}' onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">"{[name]}"</span><br>
-						<span onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">{[songNum]}首歌</span>
+						<span title='{[oldName]}' onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">"{[name]}"</span><br>
+						<span onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?id={[id]}&name={[name]}&dateTime={[dateTime]}')">{[songNum]}首歌</span>
 					</div>
 				</li>
 			</div>
@@ -75,7 +75,7 @@
                 <img src="http://image.kuwo.cn/www2016/loading.gif">
                 <span>加载中...</span>
             </div>
-            <div kw_element="button" id="radioSearchPage"></div>
+            <div kw_element="button" id="radioSearchPage" class="clearfix"></div>
             <div class="searchNoneBox" style="display: none">
 	            <img src="../static/img/t_radio/radio_icon_searchNone.png" alt="">
 	            <p>抱歉！没有找到匹配的电台。</p>
@@ -86,10 +86,10 @@
         <div id="program_search">
 			<div kw_element="row_template" style="display: none;">
 				<li class="fl clearfix">
-					<a onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?programName={[name]}&radioId={[radioId]}&radioName={[radioName]}&dateTime={[dateTime]}');"><img onerror="errorimg(this)" src="{[radioImg]}"></a>
+					<a onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?programName={[name]}&radioId={[radioId]}&radioName={[radioName]}&dateTime={[dateTime]}');"><img onerror="errorimg(this)" src="{[radioImg]}"></a>
 					<div>
-						<span title='{[oldName]}' onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?programName={[name]}&radioId={[radioId]}&radioName={[radioName]}&dateTime={[dateTime]}')">"{[name]}"</span><br>
-						<span onclick="radioJumpPage('http://127.0.0.1:8020/radioProject/develop/t_radio/radioIndex.html?programName={[name]}&radioId={[radioId]}&radioName={[radioName]}&dateTime={[dateTime]}')">{[radioName]}</span>
+						<span title='{[oldName]}' onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?programName={[name]}&radioId={[radioId]}&radioName={[radioName]}&dateTime={[dateTime]}')">"{[name]}"</span><br>
+						<span onclick="radioJumpPage('http://www.kuwo.cn/pc/tmpl/t_radio/radioIndex.html?programName={[name]}&radioId={[radioId]}&radioName={[radioName]}&dateTime={[dateTime]}')">{[radioName]}</span>
 					</div>
 				</li>
 			</div>
@@ -99,7 +99,7 @@
                 <img src="http://image.kuwo.cn/www2016/loading.gif">
                 <span>加载中...</span>
             </div>
-            <div kw_element="button" id="programSearchPage"></div>
+            <div kw_element="button" id="programSearchPage" class="clearfix"></div>
             <div class="searchNoneBox" style="display: none">
 	            <img src="../static/img/t_radio/radio_icon_searchNone.png" alt="">
 	            <p>抱歉！没有找到匹配的电台节目。</p>
