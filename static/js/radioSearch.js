@@ -86,7 +86,7 @@ $(function () {
 		//			显示空电台
 
 				
-			if(parseInt(gp.total) <= 12){
+			if(parseInt(gp.total) <= 9){
 				$('#radioSearchPage').hide();
 			}else{
 				$('#radioSearchPage').show();
@@ -152,7 +152,7 @@ $(function () {
         },
         after : function(module, gp, data){
 			$("#programCnt").html("搜索节目("+gp.total+")");	
-			if(parseInt(gp.total) < 12){
+			if(parseInt(gp.total) < 9){
 				$('#programSearchPage').hide();
 			}else{
 				$('#programSearchPage').show();
@@ -212,6 +212,7 @@ $(function () {
  * 
  */
 function getRadioDataComFn(){
+	initBox();
 	$(".navTab").show();
 	
 	if(isFirstTap=='true'){
@@ -262,6 +263,7 @@ function setEventFn(){
 //		默认显示第一个
 		serverValNow = inpVal;
 		initBox();
+
 		if(inpVal.length <= 0){
 //			显示推荐页				
 			if($('.recommendOl li').length=='undefined' || $('.recommendOl li').length < 1  ){
@@ -293,6 +295,10 @@ function setEventFn(){
 			jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&t='+Math.random();
 			$pcApi.pageJumpOther(jumpUrl,false);
 			$("#program_search").show();
+			if($('.choseProgram li').length<=0){
+				$(".searchNoneBox").show();
+			}
+
 	
         }else{
         	isFirstTap = 'true';
@@ -300,7 +306,9 @@ function setEventFn(){
 			jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&t='+Math.random();
 			$pcApi.pageJumpOther(jumpUrl,false);
 			$("#radio_search").show();
-
+			if($('.choseStation li').length<=0){
+				$(".searchNoneBox").show();
+        	}
         }
         $(this).addClass('active');
     });
