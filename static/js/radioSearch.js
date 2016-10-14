@@ -1,5 +1,6 @@
 var serverValNow ="" ;
 var isFirstTap = 'true';
+
 //  在完成中回调
 var isProgramComplice = false;
 var isRadioComplice = false;
@@ -100,11 +101,8 @@ $(function () {
 				var formatData = {};
 				if( result.data.radioResult.datas && result.data.radioResult.datas !=undefined ){
 					for(var i=0,resultLen=result.data.radioResult.datas.length; i< resultLen ;i++ ){
-						result.data.radioResult.datas[i].oldName = result.data.radioResult.datas[i].name;
-						
-						result.data.radioResult.datas[i].name = searchReplaceAll(result.data.radioResult.datas[i].name);
-
-						
+						result.data.radioResult.datas[i].oldName = result.data.radioResult.datas[i].name;						
+						result.data.radioResult.datas[i].name = searchReplaceAll(result.data.radioResult.datas[i].name);					
 					}				
 				}
 				formatData.list = result.data.radioResult.datas;
@@ -145,10 +143,8 @@ $(function () {
 				var formatData = {};	
 				if(result.data.programResult.datas&& result.data.programResult.datas!=undefined ){
 					for(var i=0,resultLen=result.data.programResult.datas.length; i< resultLen ;i++ ){			
-						result.data.programResult.datas[i].oldName = result.data.programResult.datas[i].name;
-						
+						result.data.programResult.datas[i].oldName = result.data.programResult.datas[i].name;						
 						result.data.programResult.datas[i].name = searchReplaceAll(result.data.programResult.datas[i].name)
-
 						result.data.programResult.datas[i].radioName = searchReplaceAll(result.data.programResult.datas[i].radioName)
 					}					
 				}
@@ -243,8 +239,7 @@ function setEventFn(){
     $('.navTab a').on('click',function () {
 		var inpVal = document.getElementById('inp').value;
 //		默认显示第一个
-		serverValNow = inpVal;
-		
+		serverValNow = inpVal;		
     	var jumpUrl = '';
     	initBox();
         $(".navTab").show();
