@@ -190,6 +190,12 @@
 					return gotoNextPage(module);
 				} else if (kwElementVal == "btn_page") {
 					var pageNum = $(this).html();
+//			记录		
+		setTimeout(function(){
+			jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+			$pcApi.pageJumpOther(jumpUrl,false);
+		},100);
+
 					if(pageNum != undefined){
 						return gotoPage(module, parseInt(pageNum), false);
 					}

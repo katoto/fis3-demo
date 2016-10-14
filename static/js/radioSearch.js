@@ -1,6 +1,10 @@
 var serverValNow ="" ;
 var isFirstTap = 'true';
+var commendPageNow = 1;
+var radioPageNow = 1;
+var programPageNow = 1;
 
+//  注意url 上的类型是string 
 //  在完成中回调
 var isProgramComplice = false;
 var isRadioComplice = false;
@@ -23,14 +27,25 @@ var urlData = (function () {
     return obj;
 })();
 
-console.log(urlData);
-if(urlData.isFirstTap != undefined){
+//console.log(urlData);
+//更新状态
+if(urlData.isFirstTap && urlData.isFirstTap != undefined){
 	isFirstTap = urlData.isFirstTap;	
 }
+if(urlData.searchVal && urlData.searchVal != undefined){	
+	serverValNow = urlData.searchVal;
+}
 
-
-
-
+//  待验证
+if(urlData.commendPageNow != undefined && urlData.commendPageNow !='' ){
+	commendPageNow = +urlData.commendPageNow;
+}
+if(urlData.radioPageNow != undefined && urlData.radioPageNow !='' ){
+	radioPageNow = +urlData.radioPageNow;
+}
+if(urlData.programPageNow != undefined && urlData.programPageNow !='' ){
+	programPageNow = +urlData.programPageNow;
+}
 
 $(function () {
 //	搜索
@@ -44,12 +59,13 @@ $(function () {
         init : function(module, gp, pageNum){
         },
         after : function(module, gp, data){
+        	commendPageNow = gp.current;
 			if(data && data.data.pv && data.data.pv!='undefined'){
 				$('#searchNum').html(data.data.pv);
 			}
         },
         pageFormat:function(result){
-        	console.log(result);
+
 			if(result && result.data && result.data!=null){
 				var formatData = {};
 				for(var i=0,resultLen=result.data.radioResult.datas.length; i< resultLen ;i++ ){
@@ -78,7 +94,10 @@ $(function () {
 			var words = $("#inp").val();
 			return {words:words};
         },
-        after : function(module, gp, data){	      	
+        after : function(module, gp, data){
+			radioPageNow = gp.current; 
+
+
 			if(data && data.data.pv && data.data.pv!='undefined'){
 				$('#searchNum').html(data.data.pv);
 			}
@@ -127,6 +146,8 @@ $(function () {
 			return {words:words};
         },
         after : function(module, gp, data){
+
+			programPageNow = gp.current;
 			$("#programCnt").html("搜索节目("+gp.total+")");	
 			if(parseInt(gp.total) < 9){
 				$('#programSearchPage').hide();
@@ -161,14 +182,15 @@ $(function () {
 //  绑定事件
 	setEventFn();
 //  带值过来的情况
+
     if( urlData.searchVal && decodeURIComponent(urlData.searchVal)!='' ){
 		$("#inp").val(decodeURIComponent(urlData.searchVal));	
     		initBox();
-			$.kw_page.gotoPage("radio_search", 1, true);
-			$.kw_page.gotoPage("program_search", 1, true);	
+			$.kw_page.gotoPage("radio_search", radioPageNow, true);
+			$.kw_page.gotoPage("program_search",programPageNow, true);	
     }else{
 //  	走推荐
-		$.kw_page.gotoPage("recommend", 1, true);   	
+		$.kw_page.gotoPage("recommend", commendPageNow, true);   	
     }
 });
 
@@ -202,6 +224,8 @@ function getRadioDataComFn(){
 function radioJumpPage(url){
     $pcApi.pageJumpOther(url);
 }
+
+
 /**
  * 事件处理函数
  * 
@@ -214,7 +238,11 @@ function setEventFn(){
         	$("#searchBtnClick").click();
         }
    });
- 	$("#searchBtnClick").on('click',function(){	
+ 	$("#searchBtnClick").on('click',function(){
+		commendPageNow = 1;
+		radioPageNow = 1;
+		programPageNow = 1; 		
+ 		
 		var inpVal = document.getElementById('inp').value;
 //		默认显示第一个
 		serverValNow = inpVal;
@@ -222,19 +250,18 @@ function setEventFn(){
 		if(inpVal.length <= 0){
 //			显示推荐页				
 			if($('.recommendOl li').length=='undefined' || $('.recommendOl li').length < 1  ){
-				$.kw_page.gotoPage("recommend", 1, true);
+				$.kw_page.gotoPage("recommend", commendPageNow, true);
 			}				
 			$("#recommend").show();							
 		}else{			
-			$.kw_page.gotoPage("radio_search", 1, true);
-			$.kw_page.gotoPage("program_search", 1, true);								
-
+			$.kw_page.gotoPage("radio_search", radioPageNow, true);
+			$.kw_page.gotoPage("program_search", programPageNow, true);
 		}
 		
-		jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&t='+Math.random();
-		$pcApi.pageJumpOther(jumpUrl,false);
-	})
-	
+jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal='+serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+
+$pcApi.pageJumpOther(jumpUrl,false);
+	})	
 	   // tab 切换
     $('.navTab a').on('click',function () {
 		var inpVal = document.getElementById('inp').value;
@@ -246,8 +273,8 @@ function setEventFn(){
         if($(this).index()){
 //      	节目
 			isFirstTap = 'false';
-			jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&t='+Math.random();
-			$pcApi.pageJumpOther(jumpUrl,false);
+jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+$pcApi.pageJumpOther(jumpUrl,false);
 			$("#program_search").show();
 			if($('.choseProgram li').length<=0){
 				$(".searchNoneBox").show();
@@ -257,8 +284,9 @@ function setEventFn(){
         }else{
         	isFirstTap = 'true';
 //      	电台
-			jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&t='+Math.random();
-			$pcApi.pageJumpOther(jumpUrl,false);
+//http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html
+jumpUrl = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+$pcApi.pageJumpOther(jumpUrl,false);
 			$("#radio_search").show();
 			if($('.choseStation li').length<=0){
 				$(".searchNoneBox").show();
@@ -266,6 +294,10 @@ function setEventFn(){
         }
         $(this).addClass('active');
     });
+}
+
+function OnJump(){
+	
 }
 
 /**
