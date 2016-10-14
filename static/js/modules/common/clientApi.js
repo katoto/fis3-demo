@@ -279,7 +279,6 @@ SERVER_URL = "http://www.kuwo.cn";
 
         if(typeof(flag)==="undefined"||flag===null|| flag===''){
             flag='true';
-
         }
         var param = '';
         param={'souces':'myhomepage'};
