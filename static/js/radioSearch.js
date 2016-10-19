@@ -65,7 +65,6 @@ $(function () {
 			}
         },
         pageFormat:function(result){
-
 			if(result && result.data && result.data!=null){
 				var formatData = {};
 				for(var i=0,resultLen=result.data.radioResult.datas.length; i< resultLen ;i++ ){
@@ -257,8 +256,9 @@ function setEventFn(){
 			$.kw_page.gotoPage("radio_search", radioPageNow, true);
 			$.kw_page.gotoPage("program_search", programPageNow, true);
 		}
-		
+
 jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal='+serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
+	console.log(jumpUrl)	
 $pcApi.pageJumpOther(jumpUrl,false);
 	})	
 	   // tab 切换
@@ -283,6 +283,7 @@ $pcApi.pageJumpOther(jumpUrl,false);
         }else{
         	isFirstTap = 'true';
 //      	电台
+
 //http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html
 jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
 $pcApi.pageJumpOther(jumpUrl,false);
@@ -387,4 +388,39 @@ function loadErrorPage(){
     $("body").html('');
     $("body").html('<div id="l_loadfail" style="display:block; height:100%; padding:0; top:0; "><div class="loaderror"><img src="../static/img/t_radio/jiazai.jpg" /><p>网络似乎有点问题 , <a hidefocus href="###" onclick="window.location.reload();return false;">点此刷新页面</a></p></div></div>');
 }
+
+function OnJump(params){
+	console.log(params);
+	params=params.replace(/&quot;/g,'\'');
+    params = decodeURIComponent(params.split(";")[4]);
+    initBox();
+	if (params.indexOf('radioSearch')> -1) {
+		if(params.indexOf('searchVal=&')>-1){
+//			显示推荐
+			$("#recommend").show();
+		}else{	
+			$(".navTab").show();
+			$($(".navTab a").removeClass('active').get(0)).addClass('active');
+	
+			if(params.indexOf('isFirstTap=true')>-1 &&params.indexOf('pageIndex')>-1 ){			
+				$("#radio_search").show();
+				if($('.choseStation li').length<=0){
+					$(".searchNoneBox").show();
+	        	}
+			}		
+			if(params.indexOf('isFirstTap=false')>-1 && params.indexOf('pageIndex')>-1){
+				$(".navTab").show();
+				$($(".navTab a").removeClass('active').get(1)).addClass('active');
+				$("#program_search").show();
+				if($('.choseProgram li').length<=0){
+					$(".searchNoneBox").show();
+				}	
+				return;
+			}
+
+		}
+	}
+}
+
+
 

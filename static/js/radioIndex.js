@@ -11,6 +11,7 @@ isReqRadioList = 0;
  *  拿取url上的数据  去<em></em>标签
  *  @return {}.+数据
  */
+
 var urlData = (function () {
     var obj = {},
     	deseg = decodeURIComponent(window.location.search),
@@ -29,9 +30,7 @@ var urlData = (function () {
 
 
 ;$(function () {		
-//	时间列表
-	getDate();
-	
+
    $('.contentList li').on('mouseenter',function () {
        $('.contentList li').removeClass('active');
        $(this).addClass('active')
@@ -55,8 +54,7 @@ var urlData = (function () {
 		
    	})
    	$('.allAdd').on('click',function(){  		
-		$pcApi.addMusic(playStringArr);  
-		
+		$pcApi.addMusic(playStringArr);  		
    	})
 	
 //	弹窗事件
@@ -69,17 +67,17 @@ var urlData = (function () {
 	
 //  跳转节目台
 	document.getElementById('searchBtn').onclick = function() {
-
 		var searchVal = document.querySelector('.searchBox input').value,
-			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
-//			url = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
+			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal='+searchVal+'&isFirstTap='+true+'&pageIndex=1&t='+parseInt(Math.random()*100);
+//			url = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal='+searchVal+'&isFirstTap='+true+'&pageIndex=1&t='+parseInt(Math.random()*100);
 		$pcApi.pageJumpOther(url);
 	};
 	document.querySelector('.searchBox input').onkeydown = function(e) {
 
 		if(e.keyCode === 13) {
 			var searchVal = document.querySelector('.searchBox input').value,
-			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal=' + searchVal+'&t='+Math.random();
+			url = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal='+searchVal+'&isFirstTap='+true+'&pageIndex=1&t='+parseInt(Math.random()*100);
+//			url = 'http://127.0.0.1:8020/radioProject/develop/t_radio/radioSearch.html?searchVal='+searchVal+'&isFirstTap='+true+'&pageIndex=1&t='+parseInt(Math.random()*100);
 			$pcApi.pageJumpOther(url);
 		}
 	};
@@ -111,6 +109,8 @@ function getRadioStation(){
         jsonpCallback: "radio_Station",
     	success: function (data) {
 //  		console.log(data);
+    		//	时间列表
+			getDate(data.data.time);   		
     		$('.selectBox').show();
     		var StationStr = '';
     		if(data && data.status ===200 &&  data.data && data.data.radioResult !=null){
@@ -214,7 +214,6 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
             var html = defaultHead;
             if(!data.data)data.data={};
             var programSongs = data.data.programSongs||[];
-
 			var programLen =  programSongs.length;
 			
             if (programLen == 0) {//无数据
@@ -236,8 +235,7 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
             for (i = 0; i < programLen; i++) {
 
             	var playString = createPlayString(programSongs[i]);
-				playStringArr.push(playString);
-            	
+				playStringArr.push(playString);           	
 				var programSong = programSongs[i];
          
                 if (programSong.type == "1") {
@@ -437,16 +435,17 @@ function musicNowPlaying(){
  */
 
 
-function getDate(){
+function getDate(d){
 	var getDateStr = '',
-		oDate = new Date(),
+		oDate = new Date(d),
 		oYear = oDate.getFullYear(),
 		oMonth = oDate.getMonth()+1,
 		oDay = oDate.getDate(),
 		i,
 		iDay,iYear,iMonth,formateTime;
-		
+		//	明天让浩源返回毫秒数
 
+		console.log(oDate);
 	for( i=0;i<=6;i++){
 		 iDay = getYesterDay(oDate,i);
 	     iYear = iDay.getFullYear();    
@@ -456,11 +455,13 @@ function getDate(){
 	getDateStr +='<option value="'+iYear+'-'+toDouble(iMonth)+'-'+toDouble(iDay)+'">'+iYear+'年'+toDouble(iMonth)+'月'+toDouble(iDay)+'日</option>'
 	 	
 	}
+	console.log(getDateStr);
 	$('#radio_selectOPTime').html(getDateStr);
+	
 }
 
 function getYesterDay(date,n){      
-    var yesterday_ms=date.getTime()-1000*60*60*24*n,     
+    var yesterday_ms=date-1000*60*60*24*n,     
     	yesterday = new Date();       
     yesterday.setTime(yesterday_ms);       
     return yesterday;
