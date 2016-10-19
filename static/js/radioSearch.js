@@ -258,7 +258,7 @@ function setEventFn(){
 		}
 
 jumpUrl = 'http://www.kuwo.cn/pc/tmpl/t_radio/radioSearch.html?searchVal='+serverValNow+'&isFirstTap='+isFirstTap+'&commendPageNow='+commendPageNow+'&radioPageNow='+radioPageNow+'&programPageNow='+programPageNow+'&t='+parseInt(Math.random()*100);
-	console.log(jumpUrl)	
+
 $pcApi.pageJumpOther(jumpUrl,false);
 	})	
 	   // tab 切换

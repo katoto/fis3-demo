@@ -445,7 +445,7 @@ function getDate(d){
 		iDay,iYear,iMonth,formateTime;
 		//	明天让浩源返回毫秒数
 
-		console.log(oDate);
+//		console.log(oDate);
 	for( i=0;i<=6;i++){
 		 iDay = getYesterDay(oDate,i);
 	     iYear = iDay.getFullYear();    
@@ -455,7 +455,7 @@ function getDate(d){
 	getDateStr +='<option value="'+iYear+'-'+toDouble(iMonth)+'-'+toDouble(iDay)+'">'+iYear+'年'+toDouble(iMonth)+'月'+toDouble(iDay)+'日</option>'
 	 	
 	}
-	console.log(getDateStr);
+//	console.log(getDateStr);
 	$('#radio_selectOPTime').html(getDateStr);
 	
 }
