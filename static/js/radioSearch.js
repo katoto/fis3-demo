@@ -402,13 +402,13 @@ function OnJump(params){
 			$(".navTab").show();
 			$($(".navTab a").removeClass('active').get(0)).addClass('active');
 	
-			if(params.indexOf('isFirstTap=true')>-1 &&params.indexOf('pageIndex')>-1 ){			
+			if(params.indexOf('isFirstTap=true')>-1  ){			
 				$("#radio_search").show();
 				if($('.choseStation li').length<=0){
 					$(".searchNoneBox").show();
 	        	}
 			}		
-			if(params.indexOf('isFirstTap=false')>-1 && params.indexOf('pageIndex')>-1){
+			if(params.indexOf('isFirstTap=false')>-1 ){
 				$(".navTab").show();
 				$($(".navTab a").removeClass('active').get(1)).addClass('active');
 				$("#program_search").show();
