@@ -396,7 +396,7 @@ function OnJump(params){
     initBox();
 	if (params.indexOf('radioSearch')> -1) {
 		if(params.indexOf('searchVal=&')>-1){
-//			显示推荐
+		//		显示推荐
 			$("#recommend").show();
 		}else{	
 			$(".navTab").show();
@@ -417,7 +417,6 @@ function OnJump(params){
 				}	
 				return;
 			}
-
 		}
 	}
 }

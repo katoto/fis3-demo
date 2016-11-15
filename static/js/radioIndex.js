@@ -113,7 +113,7 @@ function getRadioStation(){
 			getDate(data.data.time);   		
     		$('.selectBox').show();
     		var StationStr = '';
-    		if(data && data.status ===200 &&  data.data && data.data.radioResult !=null){
+    		if(data && data.status ===200 &&  data.data && data.data.radioResult !=null ){
 
     			if(data.data.city=='' || data.data.city=='undefined'){
     				data.data.city = data.data.province;
@@ -136,32 +136,36 @@ function getRadioStation(){
 					urlData.programName = decodeURIComponent(urlData.programName);
 					StationStr +='<option value="'+urlData.radioId +' '+urlData.dateTime+'">'+urlData.radioName +'</option>';    		
 				}
-
-    			for (var i=0,len =data.data.radioResult.datas.length; i< len ; i++ ){
-					if(urlData.goRadioName!=undefined){
-	     				if(data.data.radioResult.datas[i].name==urlData.goRadioName){
-	    					continue;
-	    				}   										
-					}
+				try{
 					
-					if(urlData.name!=undefined){
-	     				if(data.data.radioResult.datas[i].name==urlData.name){
-	    					continue;
-	    				} 						
-					}
-
-					if(urlData.radioName!=undefined){
-	     				if(data.data.radioResult.datas[i].name==urlData.radioName){
-	    					continue;
-	    				}   						
-					}
-
-		            StationStr += '<option value="'+data.data.radioResult.datas[i].id +' '+data.data.radioResult.datas[i].dateTime+'">'+data.data.radioResult.datas[i].name +'</option>';    				
-    			}   			
+				
+	    			for (var i=0,len =data.data.radioResult.datas.length; i< len ; i++ ){
+						if(urlData.goRadioName!=undefined){
+		     				if(data.data.radioResult.datas[i].name==urlData.goRadioName){
+		    					continue;
+		    				}   										
+						}
+						
+						if(urlData.name!=undefined){
+		     				if(data.data.radioResult.datas[i].name==urlData.name){
+		    					continue;
+		    				} 						
+						}
+	
+						if(urlData.radioName!=undefined){
+		     				if(data.data.radioResult.datas[i].name==urlData.radioName){
+		    					continue;
+		    				}   						
+						}
+	
+			            StationStr += '<option value="'+data.data.radioResult.datas[i].id +' '+data.data.radioResult.datas[i].dateTime+'">'+data.data.radioResult.datas[i].name +'</option>';    				
+	    			} 
+    			}catch(e){
+    				console.log('radioList  （radioResult.datas为null）列表为空');
+    			}
     			$('#sel').html(StationStr);
 				$('#radio_Station').html(data.data.city);
   
-
 				RADIO_param = $('#sel').val().split(' ');				
 				getRadioList(RADIO_param[0],RADIO_param[1]);
   
@@ -171,7 +175,6 @@ function getRadioStation(){
     		}
     	},
     	error:function(){
-
     		console.log("getRadioStation error");
     		$('.selectBox').hide();
 
@@ -182,7 +185,6 @@ function getRadioStation(){
 	    	}else{
 	    		loadErrorPage();    		
 	    	}
-
     	}
    })
 }
@@ -275,15 +277,16 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
                       	}
                         html = html + '<a class="more" title="更多操作" href="javascript:;" onclick="window.$pcApi.moreOperation(\''+ playString +'\')" ></a>';
 
-                        if( programSongFormat && programSongFormat !='undefined' && programSongFormat && programSongFormat.indexOf('AL')>=0 ){                        	
-                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#e68b16;border:1px solid #e68b16">无损</a></li>';                       	
+                        if( programSongFormat && programSongFormat !='undefined' && programSongFormat && programSongFormat.indexOf('AL')>=0 ){  
+                        						
+                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap aq" ></a></li>';                       	
                         }else if(programSongFormat && programSongFormat.indexOf('MP3H') >=0 || programSongFormat.indexOf('MP3192') >=0  ){
-                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#3ca7ee;border:1px solid #3ca7ee">超品</a></li>';
+                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap sq" ></a></li>';
                         }else if( programSongFormat && programSongFormat.indexOf('WMA128') >=0){
-                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#747474;border:1px solid #747474">高品</a></li>';
+                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap hq" ></a></li>';
                         	
                         }else{
-                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#747474;border:1px solid #747474">流畅</a></li>';
+                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap lq" ></a></li>';
                         }
 
                         if (i == (programSongs.length - 1)) {
@@ -345,14 +348,14 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
                         html = html + '<a title="更多操作" class="more" href="javascript:;" onclick="window.$pcApi.moreOperation(\''+ playString +'\')" ></a>';
                         
                         if( programSongFormat !='undefined' && programSongFormat.indexOf('AL')>=0 ){                        	
-                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#e68b16;border:1px solid #e68b16">无损</a></li>';                       	
+                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap aq" ></a></li>';                       	
                         }else if(programSongFormat.indexOf('MP3H') >=0 || programSongFormat.indexOf('MP3192') >=0  ){
-                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#3ca7ee;border:1px solid #3ca7ee">超品</a></li>';
+                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap sq"></a></li>';
                         }else if(programSongFormat.indexOf('WMA128') >=0){
-                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#747474;border:1px solid #747474">高品</a></li>';
+                        	html = html + '</div ><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap hq"></a></li>';
                         	
                         }else{
-                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap" style="color:#747474;border:1px solid #747474">流畅</a></li>';
+                        	html = html + '</div><a title="选择试听音质" onclick="$pcApi.selQuality(\''+playString+'\' , \''+ programSongFormat +'\' );" href="javascript:;" class="musicTap lq"></a></li>';
                         }
                         
                         j++;
@@ -475,7 +478,6 @@ function toDouble(num){
 /**
  *   锚点 fn  通过offset 实现
  */
-
 
 function triggerPoint(programName) {
 //	让url上的数据不再生效
