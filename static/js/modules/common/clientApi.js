@@ -3,7 +3,7 @@
  */
 // SERVER_URL = "http://60.29.226.189:9001";
 SERVER_URL = "http://www.kuwo.cn";
-// SERVER_URL = "http://172.17.70.9:8080";
+
 (function (window) {
     var api = {};
     var albumName = "";//专辑名字用于iplay全部播放
@@ -70,7 +70,7 @@ SERVER_URL = "http://www.kuwo.cn";
     };
     api.getKid = function(){
         var kid = api.getValue(getUserStateString(),"devid");
-        console.log(kid)
+
         if(kid == ""){
             kid = 0;
         }
@@ -189,23 +189,31 @@ SERVER_URL = "http://www.kuwo.cn";
      * @param musicParam
      */
 
-    api.playMusics = function(musicParamArr){
+    api.playMusics = function(musicParamArr,title){
         var musicSize = musicParamArr.length;
         var musicParams='';
         for(var i = 0; i < musicSize; i++){
             musicParams += '&s' + (i+1)+ '=' + musicParamArr[i];
         }
-        api.callClient("Play?mv=0&n=" + musicSize + musicParams);
+        
+        if(sentlogNumber){
+        	sentlogNumber('playAll')
+        }
+        var csrc = "曲库->首页->精选电台->广播电台->"+title;
+        api.callClient("Play?mv=0&n=" + musicSize + musicParams+"&CSRC="+encodeURIComponent(csrc));
     };
 
     /**
      * 播放单曲
      * @param musicParam
      */
-    api.playMusic = function(musicParam){
-
+    api.playMusic = function(musicParam,songName){
         musicParam = decodeURIComponent(musicParam);
-        api.callClient("Play?mv=0&n=1" + "&s1=" + encodeURIComponent(musicParam));
+        if(sentlogNumber){
+        	sentlogNumber('music')
+        }
+        var csrc = "曲库->首页->精选电台->广播电台->"+selRadioName+"->"+songName;
+        api.callClient("Play?mv=0&n=1" + "&s1=" + encodeURIComponent(musicParam)+"&CSRC="+encodeURIComponent(csrc));
     };
 
     /**
@@ -517,7 +525,6 @@ SERVER_URL = "http://www.kuwo.cn";
      * */	
 	api.selQuality = function(playSting, mdcode){
 		if(mdcode && playSting){
-			console.log(111);
 			return api.callClient("SelQuality?mv=0&n=1&s1="+playSting+"&mediacode="+mdcode+"&play=1")			
 		}
 

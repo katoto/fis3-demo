@@ -7,6 +7,10 @@ RADIO_param = [];
 
 isReqRadioStation = 0;
 isReqRadioList = 0;
+
+var selRadioName = '';
+var selMusicName='';
+
 /**
  *  拿取url上的数据  去<em></em>标签
  *  @return {}.+数据
@@ -28,9 +32,7 @@ var urlData = (function () {
     return obj;
 })();
 
-
 ;$(function () {		
-
    $('.contentList li').on('mouseenter',function () {
        $('.contentList li').removeClass('active');
        $(this).addClass('active')
@@ -40,17 +42,19 @@ var urlData = (function () {
    
     $('#sel').on('change',function(){
 		RADIO_param = $('#sel').val().split(' ');
+		selRadioName = RADIO_param[2];
    		getRadioList(RADIO_param[0],RADIO_param[1]);
    		$('#radio_selectOPTime').val(RADIO_param[1]);
    })  	
    	
    $('#radio_selectOPTime').on('change',function(){
    		RADIO_param = $('#sel').val().split(' ');
+   		selRadioName = RADIO_param[2];
 		getRadioList(RADIO_param[0],$('#radio_selectOPTime').val());  	
    })
    
-   	$('.allPlay').on('click',function(){  		
-		$pcApi.playMusics(playStringArr);  
+   	$('.allPlay').on('click',function(){
+		$pcApi.playMusics(playStringArr,selRadioName);  
 		
    	})
    	$('.allAdd').on('click',function(){  		
@@ -84,8 +88,41 @@ var urlData = (function () {
 		
 // 	电台列表数据  推荐电台数据
    	getRadioStation(); 
-   
+   	
+//  统计进入页面的日志 
+	setTimeout(function(){
+		sentlogNumber('page');		
+	},0)
+	
 });
+
+/**
+ *   统计进入页面pv uv   clientApi里也有pv uv
+ */
+function sentlogNumber(type){
+	switch (type){
+		case 'page':
+        window.setTimeout(function(){
+            var pageImg = new Image();
+            pageImg.src="http://webstat.kuwo.cn/logtj/comm/pc/radio/page_load.jpg";
+        },300);
+		break;
+		case 'music':
+        window.setTimeout(function(){
+            var musicImg = new Image();
+            musicImg.src="http://webstat.kuwo.cn/logtj/comm/pc/radio/play_song_sum.jpg";
+        },300);		
+		break;
+		case 'playAll':
+        window.setTimeout(function(){
+            var musicImg = new Image();
+            musicImg.src="http://webstat.kuwo.cn/logtj/comm/pc/radio/all_play_song_sum.jpg";
+        },300);		
+		break;
+		default : return false;
+	}
+}
+
 
 /**
  *   跳转界面
@@ -108,7 +145,7 @@ function getRadioStation(){
         timeout:5000,
         jsonpCallback: "radio_Station",
     	success: function (data) {
-//  		console.log(data);
+
     		//	时间列表
 			getDate(data.data.time);   		
     		$('.selectBox').show();
@@ -121,20 +158,20 @@ function getRadioStation(){
 //  			名字过长 处理
 //				入口跳转
 				if( urlData.goRadioName!=undefined && urlData.goRadioId!=undefined ){					
-					StationStr +='<option value="'+urlData.goRadioId +' '+$('#radio_selectOPTime').val()+'">'+urlData.goRadioName +'</option>';    		
+					StationStr +='<option value="'+urlData.goRadioId +' '+$('#radio_selectOPTime').val()+' '+urlData.goRadioName+'">'+urlData.goRadioName +'</option>';    		
 				}				
 								
 //				电台跳转
 				if( urlData.id!=undefined && urlData.name!=undefined && urlData.dateTime!=undefined ){
 					urlData.name = decodeURIComponent(urlData.name);
-					StationStr +='<option value="'+urlData.id +' '+urlData.dateTime+'">'+urlData.name +'</option>';    		
+					StationStr +='<option value="'+urlData.id +' '+urlData.dateTime+' '+urlData.name+'">'+urlData.name +'</option>';    		
 					
 				}
 //				节目跳转				
 				if(urlData.dateTime!=undefined && urlData.radioId!=undefined && urlData.radioName!=undefined && urlData.programName !=undefined ){
 					urlData.radioName = decodeURIComponent(urlData.radioName);
 					urlData.programName = decodeURIComponent(urlData.programName);
-					StationStr +='<option value="'+urlData.radioId +' '+urlData.dateTime+'">'+urlData.radioName +'</option>';    		
+					StationStr +='<option value="'+urlData.radioId +' '+urlData.dateTime+' '+urlData.radioName+'">'+urlData.radioName +'</option>';    		
 				}
 				try{
 					
@@ -158,24 +195,25 @@ function getRadioStation(){
 		    				}   						
 						}
 	
-			            StationStr += '<option value="'+data.data.radioResult.datas[i].id +' '+data.data.radioResult.datas[i].dateTime+'">'+data.data.radioResult.datas[i].name +'</option>';    				
+			            StationStr += '<option value="'+data.data.radioResult.datas[i].id +' '+data.data.radioResult.datas[i].dateTime+' '+data.data.radioResult.datas[i].name+'">'+data.data.radioResult.datas[i].name +'</option>';    				
 	    			} 
     			}catch(e){
-    				console.log('radioList  （radioResult.datas为null）列表为空');
+    				console.error('radioList  （radioResult.datas为null）列表为空');
     			}
     			$('#sel').html(StationStr);
 				$('#radio_Station').html(data.data.city);
   
-				RADIO_param = $('#sel').val().split(' ');				
+				RADIO_param = $('#sel').val().split(' ');	
+				selRadioName = RADIO_param[2];
 				getRadioList(RADIO_param[0],RADIO_param[1]);
   
     		}else{
-    			console.log("getRadioStation error");
+    			console.error("getRadioStation error");
 				$('.selectBox').hide();
     		}
     	},
     	error:function(){
-    		console.log("getRadioStation error");
+    		console.error("getRadioStation error");
     		$('.selectBox').hide();
 
 	    	if(isReqRadioStation<2){
@@ -188,8 +226,6 @@ function getRadioStation(){
     	}
    })
 }
-
-
 
 /**
  *    获取  radio list 数据
@@ -210,7 +246,6 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
         timeout:5000,
     	success: function (data) {
 //  		console.log(data);
-   		
         if (data.status == 200) {
             var judge = true;
             var html = defaultHead;
@@ -220,9 +255,7 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
 			
             if (programLen == 0) {//无数据
 //          	无电台如何处理
-
-				console.log('无电台');
-				
+				console.error('无电台数据');
 //				隐藏loading 显示弹框
 				$('.noresult').show();
 				$('#programList').hide();
@@ -262,9 +295,9 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
                             pay = programSong.pay;
                         }
 
-                        html = html + '<li ondblclick="window.$pcApi.playMusic(\''+ playString +'\');">';
-                        html = html + '<div class="name"><a title='+returnSpecialChar(programSongs[i].songName)+' href="javascript:;" onclick="window.$pcApi.playMusic(\''+ playString +'\')"><span class="time">'+programSongs[i].bTime.substring(11, programSongs[i].bTime.length-3)+'</span>'+returnSpecialChar(programSongs[i].songName)+'</a></div>';
-                        html = html + '<div class="artist"><a title='+returnSpecialChar(programSongs[i].artist)+' onclick="$pcApi.jump2QuKuPage(\'ARTIST\',\''+programSong.artistId+'\', \''+programSong.artist +'\' ,\'\')" href="javascript:;">'+returnSpecialChar(programSongs[i].artist)+'</a></div>';
+                        html = html + '<li ondblclick="window.$pcApi.playMusic(\''+ playString +'\',\''+returnSpecialChar(programSongs[i].songName,'playName')+'\');">';
+                        html = html + '<div class="name"><a title='+returnSpecialChar(programSongs[i].songName,'titleName')+' href="javascript:;" onclick="window.$pcApi.playMusic(\''+ playString +'\',\''+returnSpecialChar(programSongs[i].songName,'playName')+'\')"><span class="time">'+programSongs[i].bTime.substring(11, programSongs[i].bTime.length-3)+'</span>'+returnSpecialChar(programSongs[i].songName,'titleName')+'</a></div>';
+                        html = html + '<div class="artist"><a title='+returnSpecialChar(programSongs[i].artist,'titleName')+' onclick="$pcApi.jump2QuKuPage(\'ARTIST\',\''+programSong.artistId+'\', \''+programSong.artist +'\' ,\'\')" href="javascript:;">'+returnSpecialChar(programSongs[i].artist,'titleName')+'</a></div>';
                         html = html + ' <div class="tools"><a title="添加歌曲" href="javascript:;" onclick="window.$pcApi.addMusicSingle(\''+ playString +'\')" class="add"></a>';
                         
                         if(pay != 0){
@@ -300,7 +333,6 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
                 }
                 
                 if (programSong.type == "0") {
-
                     j = 0;
                     if (flag) {
 
@@ -333,9 +365,9 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
                             pay = programSong.pay;
                         }
                         
-                        html = html + '<li ondblclick="window.$pcApi.playMusic(\''+ playString +'\');">';
-                        html = html + '<div class="name"><a title='+returnSpecialChar(programSongs[i].songName)+' href="javascript:;" onclick="window.$pcApi.playMusic(\''+ playString +'\')"><span class="time">'+programSongs[i].bTime.substring(11, programSongs[i].bTime.length-3)+'</span>'+returnSpecialChar( programSongs[i].songName)+'</a></div>';
-                        html = html + '<div class="artist"><a title='+returnSpecialChar( programSongs[i].artist)+' onclick="$pcApi.jump2QuKuPage(\'ARTIST\',\''+programSong.artistId+'\', \''+programSong.artist +'\' ,\'\')" href="javascript:;">'+returnSpecialChar( programSongs[i].artist)+'</a></div>';
+                        html = html + '<li ondblclick="window.$pcApi.playMusic(\''+ playString +'\',\''+returnSpecialChar(programSongs[i].songName,'playName')+'\');">';
+                        html = html + '<div class="name"><a title='+returnSpecialChar(programSongs[i].songName,'titleName')+' href="javascript:;" onclick="window.$pcApi.playMusic(\''+ playString +'\',\''+returnSpecialChar(programSongs[i].songName,'playName')+'\')"><span class="time">'+programSongs[i].bTime.substring(11, programSongs[i].bTime.length-3)+'</span>'+returnSpecialChar( programSongs[i].songName,'titleName')+'</a></div>';
+                        html = html + '<div class="artist"><a title='+returnSpecialChar( programSongs[i].artist,'titleName')+' onclick="$pcApi.jump2QuKuPage(\'ARTIST\',\''+programSong.artistId+'\', \''+programSong.artist +'\' ,\'\')" href="javascript:;">'+returnSpecialChar( programSongs[i].artist,'titleName')+'</a></div>';
                         html = html + ' <div class="tools" data-music=""><a title="添加歌曲" href="javascript:;" onclick="window.$pcApi.addMusicSingle(\''+ playString +'\')" class="add"></a>';
                         
                         if(pay != 0){
@@ -402,7 +434,7 @@ var url = 'http://www.kuwo.cn/pc/radio/plist?radioId='+radioId+'&time='+time;
 			},0)
             
         } else {
-            console.log("服务器异常");
+            console.error("服务器异常");
         }        
     },
     error:function(){
@@ -446,9 +478,8 @@ function getDate(d){
 		oDay = oDate.getDate(),
 		i,
 		iDay,iYear,iMonth,formateTime;
-		//	明天让浩源返回毫秒数
 
-//		console.log(oDate);
+
 	for( i=0;i<=6;i++){
 		 iDay = getYesterDay(oDate,i);
 	     iYear = iDay.getFullYear();    
@@ -458,7 +489,7 @@ function getDate(d){
 	getDateStr +='<option value="'+iYear+'-'+toDouble(iMonth)+'-'+toDouble(iDay)+'">'+iYear+'年'+toDouble(iMonth)+'月'+toDouble(iDay)+'日</option>'
 	 	
 	}
-//	console.log(getDateStr);
+
 	$('#radio_selectOPTime').html(getDateStr);
 	
 }
@@ -511,12 +542,15 @@ function triggerPoint(programName) {
  *    在网页中显示字符串中的特殊字符
  */
 
-function returnSpecialChar(s){
+function returnSpecialChar(s,playName){
+	playName = playName || 'playName';
     s = ''+s;
-	return s.replace(/\&amp;/g,"&").replace(/\&nbsp;/g," ").replace(/\&apos;/g,"'").replace(/\&quot;/g,"\"").replace(/\%26apos\%3B/g,"'").replace(/\%26quot\%3B/g,"\"").replace(/\%26amp\%3B/g,"&").replace(/‘/g,'\'').replace(/，/,',').replace(/ /g,'&nbsp;');
+    if(playName && playName ==='playName' ){
+    	return s.replace(/，/,',').replace(/ /g,'&nbsp;').replace(/‘/g,'\\\'')
+    }else if( playName && playName ==='titleName' ){
+    	return s.replace(/，/,',').replace(/ /g,'&nbsp;').replace(/‘/g,'\'')
+    }
 }
-
-
 
 /**
  *    返回顶部按钮
@@ -547,6 +581,7 @@ function OnRefresh(param) {
     $("#programList").html('');
 	$('.loading').show();
 	RADIO_param = $('#sel').val().split(' ');
+	selRadioName = RADIO_param[2];
 	getRadioList(RADIO_param[0],$('#radio_selectOPTime').val());
     
 }
@@ -561,9 +596,9 @@ function OnRefresh(param) {
 
 function createPlayString(song) {
     var paramsArr = [];
-    paramsArr[paramsArr.length] = encodeURIComponent(encodeURIComponent(song.songName));
-    paramsArr[paramsArr.length] = encodeURIComponent(encodeURIComponent(song.artist));
-    paramsArr[paramsArr.length] = encodeURIComponent(encodeURIComponent(song.ablum));
+    paramsArr[paramsArr.length] = encodeURIComponent(encodeURIComponent((song.songName)));
+    paramsArr[paramsArr.length] = encodeURIComponent(encodeURIComponent((song.artist)));
+    paramsArr[paramsArr.length] = encodeURIComponent(encodeURIComponent((song.ablum)));
     paramsArr[paramsArr.length] = song.nsig1;
     paramsArr[paramsArr.length] = song.nsig2;
     paramsArr[paramsArr.length] = song.musicId;
@@ -583,6 +618,7 @@ function createPlayString(song) {
     paramsArr[paramsArr.length] = song.albumId;
     return paramsArr.join('\t');
 }
+
 
 /**
  *   加载失败时显示error页面

@@ -299,12 +299,12 @@ section .dataSelect select{
     cursor: default;
     width: 32px;
     height: 16px;
-    margin: 6px 11px 0 0;
+    margin: 6px 36px 0 0;
     cursor: pointer;
     background: url(http://image.kuwo.cn/mpage/html5/2016/orginal/m_hd.png) no-repeat;
 }
 
-.contentList .aq {width:45px; background-position:-1px -69px;margin-right: 5px} /* 无损*/
+.contentList .aq {width:45px; background-position:-1px -69px;margin-right: 30px} /* 无损*/
 .contentList .sq { background-position:-1px -35px;}   /* 超品*/
 .contentList .hq { background-position:-1px -18px;}
 .contentList .lq { background-position:-1px -1px;}

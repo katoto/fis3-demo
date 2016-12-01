@@ -186,7 +186,8 @@ $(function () {
 		$("#inp").val(decodeURIComponent(urlData.searchVal));	
     		initBox();
 			$.kw_page.gotoPage("radio_search", radioPageNow, true);
-			$.kw_page.gotoPage("program_search",programPageNow, true);	
+			$.kw_page.gotoPage("program_search",programPageNow, true);
+			sentlogNumber();
     }else{
 //  	走推荐
 		$.kw_page.gotoPage("recommend", commendPageNow, true);   	
@@ -226,6 +227,17 @@ function radioJumpPage(url){
 
 
 /**
+ *   统计进入页面pv uv   clientApi里也有pv uv   带值过来的情况
+ */
+function sentlogNumber(){ 
+    window.setTimeout(function(){
+        var musicImg = new Image();
+        musicImg.src="http://webstat.kuwo.cn/logtj/comm/pc/radio/search_page_load.jpg";
+    },300);	
+}
+
+
+/**
  * 事件处理函数
  * 
  */
@@ -238,6 +250,8 @@ function setEventFn(){
         }
    });
  	$("#searchBtnClick").on('click',function(){
+ 		//  pv uv
+ 		sentlogNumber();		
 		commendPageNow = 1;
 		radioPageNow = 1;
 		programPageNow = 1; 		
