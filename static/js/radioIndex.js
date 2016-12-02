@@ -578,6 +578,11 @@ function OnRefresh(param) {
 		window.location.reload();
 	}
 
+	//  统计进入页面的日志 
+	setTimeout(function(){
+		sentlogNumber('page');		
+	},0)
+
     $("#programList").html('');
 	$('.loading').show();
 	RADIO_param = $('#sel').val().split(' ');
@@ -629,5 +634,3 @@ function loadErrorPage(){
     $("body").html('');
     $("body").html('<div id="l_loadfail" style="display:block; height:100%; padding:0; top:0;"><div class="loaderror"><img src="../static/img/t_radio/jiazai.jpg" /><p>网络似乎有点问题 , <a hidefocus href="###" onclick="window.location.reload();return false;">点此刷新页面</a></p></div></div>');
 }
-
-
