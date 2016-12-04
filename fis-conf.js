@@ -169,8 +169,6 @@ fis.config.set('settings.spriter.csssprites', {
     margin: 10
 });
 
-
-
 //开发阶段   解除所有过程     fis3 release debug -d ..
 fis.media('debug').match('*.{js,css,png}',{
 	useHash:false,
